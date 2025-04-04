@@ -1,0 +1,24 @@
+{
+  "name": "2-d-metaverse",
+  "version": "1.0.0",
+  "description": "These endpoints are used for user authentication and account creation.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@ljharb/tsconfig": "^0.3.2",
+    "jest": "^29.7.0",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "axios": "^1.8.4"
+  }
+}
