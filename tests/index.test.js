@@ -560,11 +560,12 @@ describe("space information", () => {
   test("admin has no spaces initially", async () => {
     const response = await axios.get(`${BACKEND_URL}/api/v1/space/all`, {
       headers: {
-        Authorization: `Bearer ${userToken}`,
+        Authorization: `Bearer ${adminToken}`,
       },
     });
     console.log("Space List Response:", response.data); // Debugging log
    expect(response.data).toBeDefined();
+   expect(response.data.spaces.length).toBe(0);
    expect(response.data.spaces).toBeDefined();
     
   });
@@ -572,27 +573,30 @@ describe("space information", () => {
   test("admin has no space initially so create a new space", async () => {
     // A POST request is made to the backend API () to create a new space.
     const spaceCreatedresponse = await axios.post(
-      `${BACKEND_URL}/api/v1/space/all`,
+      `${BACKEND_URL}/api/v1/space`,
       {
         name: "Test",
         dimensions: "100x200",
       },
       {
         headers: {
-          Authorization: `Bearer ${userToken}`,
+          Authorization: `Bearer ${adminToken}`,
         },
       }
     );
-    // Another POST request is made to the same endpoint () to fetch all spaces associated with the admin.
+    console.log("Create Space Response:", spaceCreatedresponse.data);
+    // Another get request is made to the same endpoint () to fetch all spaces associated with the admin.
     const response = await axios.get(`${BACKEND_URL}/api/v1/space/all`, {
       headers: {
-        Authorization: `Bearer ${userToken}`,
+        Authorization: `Bearer ${adminToken}`,
       },
     });
-    console.log("Spaces Data:", response?.data?.spaces);
+    console.log("Fetch Spaces Response:", response.data);
     const filteredspace = response.data.spaces.find(
       (x) => x.id == spaceCreatedresponse.data.spaceId
     );
+  
+  
     expect(filteredspace).toBeDefined();
     expect(response.data.spaces.length).toBeGreaterThan(0);
   });
